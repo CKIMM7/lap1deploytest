@@ -1,11 +1,15 @@
 const express =  require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-const cors = require('cors')
+const cors = require('cors');
+const path = require('path');
 
 app.use(express.json())
 app.use(express.urlencoded());
 app.use(cors());
+
+app.use(express.static('client'));
+app.use('/client', express.static(path.join(__dirname, 'client')));
 
 const postsData = require('./db/posts.json');
 const commentsData = require('./db/comments.json');
